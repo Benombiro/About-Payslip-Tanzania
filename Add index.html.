@@ -1,23 +1,367 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hello World</title>
-  <style>
-    body{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:100vh;
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:#f5f9ff;
-    }
-    h1{ color:#0b63c6; font-size:48px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Your Payslip: FAQs, Earnings & Deductions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(to bottom, #f9fafb, #e2e8f0);
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+        header {
+            text-align: center;
+            background: linear-gradient(to right, #1e3a8a, #1e40af);
+            color: #ffffff;
+            padding: 40px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            animation: fadeInDown 1s ease-in-out;
+        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+        h1, h2, h3 { color: #1e3a8a; animation: fadeIn 1.5s ease-in-out; }
+        .contact-info {
+            background: linear-gradient(to right, #bfdbfe, #93c5fd);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), box-shadow 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: slideInLeft 1s ease-in-out;
+        }
+        .contact-info:hover { transform: translateY(-10px) rotate(1deg); box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-100px); } to { opacity: 1; transform: translateX(0); } }
+        .faq-section { margin-bottom: 60px; animation: fadeIn 2s ease-in-out; }
+        #faq-search {
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #bfdbfe;
+            border-radius: 8px; font-size: 16px; transition: border-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out, transform 0.4s ease-in-out;
+            background: #eff6ff; color: #1e40af;
+        }
+        #faq-search:focus { border-color: #3b82f6; box-shadow: 0 0 10px rgba(59,130,246,0.25); transform: scale(1.02); outline: none; }
+        .accordion {
+            background: linear-gradient(to right, #eff6ff, #dbeafe);
+            color: #1e3a8a;
+            cursor: pointer; padding: 20px; width: 100%; border: none; text-align: left;
+            outline: none; font-size: 16px; transition: background 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), box-shadow 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-bottom: 1px solid #93c5fd; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .accordion:hover { background: linear-gradient(to right, #dbeafe, #bfdbfe); transform: translateY(-5px) scale(1.02); box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+        .accordion:after { content: '\002B'; color: #3b82f6; font-weight: bold; float: right; margin-left: 5px; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .active:after { content: "\2212"; transform: rotate(180deg); }
+        .panel {
+            padding: 0 20px; background: #eff6ff; max-height: 0; overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), padding 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 4px solid #3b82f6; border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); opacity: 0;
+            white-space: normal; word-wrap: break-word; text-align: left;
+        }
+        .panel p { font-style: italic; color: #4b5563; }
+        .active + .panel { padding: 20px; opacity: 1; }
+        table {
+            width: 100%; border-collapse: collapse; margin-bottom: 40px; background: #fff;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #e5e7eb; cursor: pointer; transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        th { background: linear-gradient(to right, #1e3a8a, #1e40af); color: #ffffff; position: relative; transition: background 0.4s ease-in-out; }
+        th.sortable:after { content: '\2195'; margin-left: 5px; font-size: 12px; transition: transform 0.3s ease-in-out; }
+        th.asc:after { content: '\2191'; transform: rotate(0deg); }
+        th.desc:after { content: '\2193'; transform: rotate(0deg); }
+        tr:nth-child(even) { background-color: #f9fafb; }
+        tr:hover { background-color: #f3f4f6; transform: scale(1.01); transition: background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .statutory th { background: linear-gradient(to right, #c2410c, #9a3412); color: #ffffff; }
+        .statutory tr:nth-child(even) { background-color: #fff7ed; }
+        .statutory tr:hover { background-color: #feebc8; }
+        .calculation th { background: linear-gradient(to right, #15803d, #166534); color: #ffffff; }
+        .calculation tr:nth-child(even) { background-color: #f0fdf4; }
+        .calculation tr:hover { background-color: #dcfce7; }
+        .additional-elements { list-style-type: decimal; padding-left: 30px; color: #4b5563; }
+        footer {
+            text-align: center; margin-top: 60px; color: #6b7280; padding: 25px;
+            background: linear-gradient(to right, #f3f4f6, #e5e7eb); border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); animation: fadeIn 2.5s ease-in-out;
+        }
+        /* Contact info interactivity */
+        .contact-info a[href^="mailto"] {
+            color: #3b82f6; text-decoration: none; transition: color 0.3s ease-in-out;
+        }
+        .contact-info a[href^="mailto"]:hover { color: #2563eb; }
+        .contact-info .copyable {
+            color: #3b82f6; cursor: pointer; position: relative; transition: color 0.3s ease-in-out;
+        }
+        .contact-info .copyable:hover { color: #2563eb; }
+        .contact-info .copyable:hover::after {
+            content: 'Copy'; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+            background: #1e3a8a; color: #ffffff; padding: 5px 10px; border-radius: 4px; font-size: 12px;
+            white-space: nowrap; z-index: 10; opacity: 1; transition: opacity 0.3s ease-in-out;
+        }
+        .contact-info .copyable::after { opacity: 0; }
+        tbody tr { transition: opacity 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+    </style>
 </head>
 <body>
-  <h1>Hello World!</h1>
+    <header>
+        <h1>UNDERSTANDING YOUR PAYSLIP: FAQs, EARNINGS & DEDUCTIONS</h1>
+    </header>
+
+    <section class="contact-info">
+        <h2>HR Office Contact Info</h2>
+        <p><strong>Personnel</strong></p>
+        <p>Tel: <span class="copyable" onclick="navigator.clipboard.writeText('+254707574482')">+254707574482</span></p>
+        <p>Email: <a href="mailto:tzpayslip@sunda.com">tzpayslip@sunda.com</a></p>
+        <p>Wecom: <span class="copyable" onclick="navigator.clipboard.writeText('Eugine Sitima')">Eugine Sitima</span> : <span class="copyable" onclick="navigator.clipboard.writeText('Ben Ombiro')">Ben Ombiro</span></p>
+    </section>
+
+    <section class="faq-section">
+        <h2>Part 1: FAQs</h2>
+        <input type="text" id="faq-search" placeholder="Search FAQs...">
+        <div id="faq-list">
+            <button class="accordion">Qn. 1: When are payslip emails usually sent out?</button>
+            <div class="panel"><p>Payslip emails will typically be sent out by Payday. If you haven't received it a day after Payday, please contact HR.</p></div>
+
+            <button class="accordion">Qn. 2: What is the password for my payslip attachment?</button>
+            <div class="panel"><p>The password for your payslip was sent in previous emails from tzpayslip@sunda.com. If you still can't find it, please visit your nearest HR Office for assistance.</p></div>
+
+            <button class="accordion">Qn. 3: I received an email, but the attached payslip doesn't seem to be mine. What should I do?</button>
+            <div class="panel"><p>Please DO NOT open the attachment further if it doesn't appear to be yours. Report this immediately to the HR Office so we can rectify the error and ensure data privacy.</p></div>
+
+            <button class="accordion">Qn. 4: The payslip attachment is missing from the email. What should I do?</button>
+            <div class="panel"><p>First, ensure you've fully downloaded the attachments. If still not visible, request a resend by contacting HR.</p></div>
+
+            <button class="accordion">Qn. 5: I accidentally deleted the payslip email. How do I get it back?</button>
+            <div class="panel"><p>Check your Trash/Bin folder first for recovery. If permanently deleted, visit or contact the HR Office to request a resend.</p></div>
+
+            <button class="accordion">Qn. 6: I entered the password, but I get a "Wrong Password" error. What should I do?</button>
+            <div class="panel"><p>Verify you're typing exactly (check for extra spaces, capitalization). If it still fails, visit or contact the HR Office as HR can issue a new password or send an unlocked copy.</p></div>
+
+            <button class="accordion">Qn. 7: If I notice any discrepancies on your payslip, what should I do?</button>
+            <div class="panel"><p>If you notice any discrepancies, please visit or contact the HR Office immediately to review your payslip details.</p></div>
+
+            <button class="accordion">Qn. 8: Can I request a printed/stamped copy of my payslip?</button>
+            <div class="panel"><p>Yes. Visit your nearest HR Office to request an official printed copy with a stamp.</p></div>
+
+            <button class="accordion">Qn. 9: How can I ensure the payslip email is legitimate?</button>
+            <div class="panel"><p>The official payslip email comes from tzpayslip@sunda.com with the subject line "[Month - Year Payslip]" (e.g., January 2025 Payslip). If you suspect phishing, contact HR immediately.</p></div>
+
+            <button class="accordion">Qn. 10: Can I change or customize my Payslip Password?</button>
+            <div class="panel"><p>Yes, just visit your nearest HR office and you will be issued with a new password.</p></div>
+
+            <button class="accordion">Qn. 11: Can I access my payslip from my mobile device?</button>
+            <div class="panel"><p>Yes. The payslip format is fully mobile-compatible for convenient viewing on all devices.</p></div>
+
+            <button class="accordion">Qn. 12: How do I update my email address for payslip delivery?</button>
+            <div class="panel"><p>Visit your nearest HR office to update your email address for future payslips.</p></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Part 2: Payslip Interpretation</h2>
+        <h3>A. Salary Calculation</h3>
+        <table id="salary-table" class="calculation">
+            <thead>
+                <tr>
+                    <th class="sortable">Salary Item (Earnings) <span data-tooltip="Click to sort by item name."></span></th>
+                    <th>Calculation Rule</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Actual Days Worked</td>
+                    <td>Should Work Days - Any Leave (Paid or Unpaid)</td>
+                </tr>
+                <tr>
+                    <td>Paid Leave</td>
+                    <td>Annual, Sick, Compassionate, Maternity/Paternity, and Injury Leave<br>Note: For all the above leave types, the Basic Salary STD is paid in full.</td>
+                </tr>
+                <tr>
+                    <td>Unpaid Leave</td>
+                    <td>Casual Leave + Absent Days</td>
+                </tr>
+                <tr>
+                    <td>Basic Salary</td>
+                    <td>(Basic Salary STD ÷ Should Work Days) × (Should Work Days – Unpaid Leaves)</td>
+                </tr>
+                <tr>
+                    <td>Position Allowance</td>
+                    <td>(Position Allowance STD ÷ Should Work Days) × Actual Days Worked</td>
+                </tr>
+                <tr>
+                    <td>Performance Bonus</td>
+                    <td>(Performance Bonus STD ÷ Should Work Days) × Actual Days Worked * (Performance Score/100)</td>
+                </tr>
+                <tr>
+                    <td>Hourly wage</td>
+                    <td>Basic salary STD ÷ 195</td>
+                </tr>
+                <tr>
+                    <td>Normal OT</td>
+                    <td>Hourly wage * Number of OT hrs * 1.5</td>
+                </tr>
+                <tr>
+                    <td>Rest/Holiday OT</td>
+                    <td>Hourly wage * Number of OT hrs * 2</td>
+                </tr>
+                <tr>
+                    <td>Night Allowance</td>
+                    <td>Hourly wage * Number of hrs * 5%</td>
+                </tr>
+                <tr>
+                    <td>Additional elements</td>
+                    <td>
+                        <ol class="additional-elements">
+                            <li>Commission – Based on company policy</li>
+                            <li>Lunch Subsidy – Based on company policy</li>
+                            <li>Termination Payment – ({Basic Salary STD} ÷ {28 Days}) × {Number of Notice Days}</li>
+                            <li>Leave Payment – ({Basic Salary STD} ÷ {28 Days}) × { Leave Balance}</li>
+                            <li>Full Attendance – Based on company policy</li>
+                            <li>Other Incentives – Based on company policy</li>
+                            <li>Other Income (Before Tax) – Salary owed, bonuses, or rewards (variable amounts)</li>
+                            <li>Other Deductions (Before Tax) – Payment in lieu of notice, leave overutilisation, salary overpayment</li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total Gross salary</td>
+                    <td>Basic salary + Position Allowance + Performance Bonus + OT + Additional Elements if any</td>
+                </tr>
+                <tr>
+                    <td>Net Pay</td>
+                    <td>Gross Salary - Statutory Deductions - Other Deductions After Tax - Loans</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>B. Statutory Deductions</h3>
+        <table id="statutory-table" class="statutory">
+            <thead>
+                <tr>
+                    <th class="sortable">Statutory Item <span data-tooltip="Click to sort by item name."></span></th>
+                    <th>Calculation Rule</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>NSSF</td>
+                    <td>Employee Contribution: 10% of Gross Salary<br>Employer Contribution: 10% of Gross Salary</td>
+                    <td>See Rates</td>
+                </tr>
+                <tr>
+                    <td>Taxable Income</td>
+                    <td>Gross Salary - Employee NSSF Contribution</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>PAYE (Income Tax)</td>
+                    <td>Monthly Taxable Income (TZS) ------- Tax Rates(%)<br>0 – 270,000 ----------------------> 0%<br>270,001 – 520,000 ---------------> 8% of amount over 270,000<br>520,001 – 760,000 ---------------> 20,000 + 20% of amount over 520,000<br>760,001 – 1,000,000 -------------> 68,000 + 25% of amount over 760,000<br>Over 1,000,000 ------------------> 128,000 + 30% of amount over 1,000,000</td>
+                    <td>See Rates</td>
+                </tr>
+                <tr>
+                    <td>NHIF</td>
+                    <td>Employee Contribution: 3% of Basic Salary STD<br>- If 3% of Basic Salary is less than 20,000 → Fixed at 20,000<br>- If 3% of Basic Salary is 20,000 or more → 3% of Basic Salary<br>Employer Contribution: Equal to the employee’s contribution</td>
+                    <td>See Rates</td>
+                </tr>
+                <tr>
+                    <td>WCF</td>
+                    <td>Employer Contribution: 0.5% of Gross Salary</td>
+                    <td>See Rates</td>
+                </tr>
+                <tr>
+                    <td>SDL</td>
+                    <td>Employer Contribution: 3.5% of Gross Salary</td>
+                    <td>See Rates</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>Document converted from "About Payslip Tanzania.pdf" | For professional use only</p>
+    </footer>
+
+    <script>
+        // Accordion functionality on hover
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("mouseenter", function() {
+                this.classList.add("active");
+                var panel = this.nextElementSibling;
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                panel.style.opacity = 1;
+            });
+            acc[i].addEventListener("mouseleave", function() {
+                this.classList.remove("active");
+                var panel = this.nextElementSibling;
+                panel.style.maxHeight = null;
+                panel.style.opacity = 0;
+            });
+        }
+
+        // FAQ Search functionality
+        const faqSearch = document.getElementById('faq-search');
+        const faqList = document.getElementById('faq-list');
+        const faqs = faqList.getElementsByClassName('accordion');
+
+        faqSearch.addEventListener('input', function() {
+            const filter = faqSearch.value.toLowerCase();
+            for (let i = 0; i < faqs.length; i++) {
+                const text = faqs[i].textContent || faqs[i].innerText;
+                if (text.toLowerCase().indexOf(filter) > -1) {
+                    faqs[i].style.display = "";
+                    faqs[i].nextElementSibling.style.display = "";
+                } else {
+                    faqs[i].style.display = "none";
+                    faqs[i].nextElementSibling.style.display = "none";
+                }
+            }
+        });
+
+        // Table sorting functionality with smoother animation
+        function sortTable(tableId, colIndex) {
+            const table = document.getElementById(tableId);
+            const tbody = table.tBodies[0];
+            const rows = Array.from(tbody.rows);
+            const th = table.querySelectorAll('th')[colIndex];
+            const dir = th.classList.contains('asc') ? -1 : 1;
+
+            rows.forEach(row => {
+                row.style.opacity = 0;
+                row.style.transform = 'translateY(10px) scale(0.98)';
+            });
+
+            setTimeout(() => {
+                rows.sort((a, b) => {
+                    let valA = a.cells[colIndex].textContent.trim();
+                    let valB = b.cells[colIndex].textContent.trim();
+                    return (valA > valB ? 1 : valA < valB ? -1 : 0) * dir;
+                });
+
+                rows.forEach(row => tbody.appendChild(row));
+
+                rows.forEach((row, index) => {
+                    setTimeout(() => {
+                        row.style.opacity = 1;
+                        row.style.transform = 'translateY(0) scale(1)';
+                    }, index * 80);
+                });
+
+                table.querySelectorAll('th').forEach(th => th.classList.remove('asc', 'desc'));
+                th.classList.toggle(dir === 1 ? 'asc' : 'desc');
+            }, 400);
+        }
+
+        document.querySelectorAll('.sortable').forEach((th, index) => {
+            th.addEventListener('click', () => sortTable(th.closest('table').id, index));
+        });
+    </script>
 </body>
 </html>
